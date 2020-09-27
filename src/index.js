@@ -8,10 +8,11 @@ import models from './models';
 const app = express();
 
 const startServer = async () => {
+    const secret = 'theSecretOfUsBede';
     const server = new ApolloServer({
         typeDefs: schema,
         resolvers,
-        context: { models }
+        context: { models, secret}
     });
 
     server.applyMiddleware({ app });
