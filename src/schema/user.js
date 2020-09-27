@@ -17,7 +17,7 @@ export default gql`
     signUp(signUpInput: SignUpInput!): User! 
   }
 
-  type SignUpInput {
+  input SignUpInput {
     name: String!
     email: String!
     passwordHash: String!
