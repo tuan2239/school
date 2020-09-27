@@ -14,6 +14,12 @@ export default gql`
   }
 
   extend type Mutation {
-    signUp(name: String!, email: String!, passwordHash: String!): User! 
+    signUp(signUpInput: SignUpInput!): User! 
+  }
+
+  type SignUpInput {
+    name: String!
+    email: String!
+    passwordHash: String!
   }
 `;
