@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
-  type Query {
+  extend type Query {
     children: [Children!]!
   }
 
@@ -11,7 +11,7 @@ export default gql`
     grade: Float!
   }
 
-  type Mutation {
+  extend type Mutation {
     addChild(name: String!, grade: Float!): Children! 
   }
 `;

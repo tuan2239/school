@@ -1,4 +1,5 @@
 import children from './children';
+import user from './user';
 import { gql } from 'apollo-server-express';
 
 const linkSchema = gql`
@@ -12,5 +13,7 @@ const linkSchema = gql`
 `;
 
 export default [
-  children
+  linkSchema,
+  children,
+  user
 ];
