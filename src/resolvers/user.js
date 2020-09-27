@@ -17,7 +17,7 @@ export default {
             const aUser = new models.User(input.signUpInput);
             await aUser.save();
             return {
-                token: createToken(aUser, secret, '120m'),
+                token: createToken(aUser, secret, '120m')
             };
         },
         signIn: async (_, { email, password }, { models, secret }) => {
@@ -37,7 +37,7 @@ export default {
             }
 
             return {
-                token: createToken(user, secret, '120m'),
+                token: createToken(user, secret, '120m')
             };
         }
     }
