@@ -5,8 +5,8 @@ export default {
         }
     },
     Mutation: {
-        signUp: async (_, { name, email, passwordHash }, { models }) => {
-            const aUser = new models.User({ name, email, passwordHash });
+        signUp: async (_, input, { models }) => {
+            const aUser = new models.User(input.signUpInput);
             await aUser.save();
             return aUser;
         }
