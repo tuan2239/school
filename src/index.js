@@ -1,18 +1,41 @@
-import { ApolloServer } from 'apollo-server-express';
+import 'dotenv/config';
+import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import express from 'express';
 import mongoose from 'mongoose';
 import schema from './schema';
 import resolvers from './resolvers';
 import models from './models';
+import jwt from "jsonwebtoken";
 
 const app = express();
 
+const getMe = async req => {
+    const token = req.headers['x-token'];
+    if (token) {
+        try {
+            return await jwt.verify(token, process.env.SECRET);
+        } catch (e) {
+            throw new AuthenticationError(
+                'Your session expired. Sign in again.',
+            );
+        }
+    }
+};
+
 const startServer = async () => {
-    const secret = 'theSecretOfUsBede';
     const server = new ApolloServer({
         typeDefs: schema,
         resolvers,
-        context: { models, secret}
+        context: async ({ req }) => {
+            if (req) {
+                const me = await getMe(req);
+                return {
+                    models,
+                    me,
+                    secret: process.env.SECRET
+                };
+            }
+        }
     });
 
     server.applyMiddleware({ app });

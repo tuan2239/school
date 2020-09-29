@@ -1,17 +1,22 @@
 
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
+import { isAdmin } from "./authorization";
+import { combineResolvers } from "graphql-resolvers";
 
 const createToken = async (user, secret, expiresIn) => {
-    const { id, email, name, phone } = user;
-    return await jwt.sign({ id, email, name, phone }, secret, { expiresIn });
+    const { id, email, name, role } = user;
+    return await jwt.sign({ id, email, name, role }, secret, { expiresIn });
 };
 
 export default {
     Query: {
-        users: (_, { }, { models }) => {
-            return models.User.find()
-        }
+        users: combineResolvers(
+            isAdmin,
+            (_, { }, { models }) => {
+                return models.User.find();
+            }
+        )
     },
     Mutation: {
         signUp: async (_, input, { models, secret }) => {
