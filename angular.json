@@ -1,0 +1,120 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "school-fe": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/school-fe",
+      "sourceRoot": "projects/school-fe/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/school-fe",
+            "index": "projects/school-fe/src/index.html",
+            "main": "projects/school-fe/src/main.ts",
+            "polyfills": "projects/school-fe/src/polyfills.ts",
+            "tsConfig": "projects/school-fe/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/school-fe/src/favicon.ico",
+              "projects/school-fe/src/assets"
+            ],
+            "styles": [
+              "projects/school-fe/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/school-fe/src/environments/environment.ts",
+                  "with": "projects/school-fe/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "school-fe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "school-fe:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "school-fe:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/school-fe/src/test.ts",
+            "polyfills": "projects/school-fe/src/polyfills.ts",
+            "tsConfig": "projects/school-fe/tsconfig.spec.json",
+            "karmaConfig": "projects/school-fe/karma.conf.js",
+            "assets": [
+              "projects/school-fe/src/favicon.ico",
+              "projects/school-fe/src/assets"
+            ],
+            "styles": [
+              "projects/school-fe/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/school-fe/tsconfig.app.json",
+              "projects/school-fe/tsconfig.spec.json",
+              "projects/school-fe/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/school-fe/e2e/protractor.conf.js",
+            "devServerTarget": "school-fe:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "school-fe:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "school-fe"
+}
