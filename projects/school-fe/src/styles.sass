@@ -1,0 +1,282 @@
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap'
+body 
+  font-size: 12px
+.iq-error h1 
+  font-weight: 900
+  font-size: 16rem
+  line-height: 14rem
+  margin-bottom: 0
+  padding-top: 45px
+  letter-spacing: 15px
+.loader
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  background-color: #ffffff
+  z-index: 100
+  mat-spinner
+    position: absolute
+    top: 50%
+    left: 50%
+    margin-top: -50px
+    margin-left: -50px
+
+::-webkit-scrollbar 
+  width: 5px
+::-webkit-scrollbar-track 
+  background: #ffffff
+::-webkit-scrollbar-thumb 
+  background: #b3b3b3
+::-webkit-scrollbar-thumb:hover 
+  background: #b3b3b3
+
+body
+    background-color: #fafafa
+.mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled=true]), .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled=true]), .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true])
+  background-color: #f2f2f2
+.content-container.mat-drawer-container
+    position: absolute
+    top: 40px
+    left: 0
+    right: 0
+    bottom: 0
+    mat-drawer
+        width: 290px
+    mat-drawer-content
+        position: relative
+    .wrap-content
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        padding: 20px
+button:focus
+  outline: none
+
+.card-header:first-child
+  display: -webkit-box
+  display: flex
+  align-items: center
+.spacer
+    flex: 1
+.mat-form-field
+  display: block !important
+.wrap-table
+  border: 1px #a3d0e4 solid
+  border-radius: 5px
+  overflow: hidden
+school-layout-management .table
+  margin-bottom: 0
+  font-size: 12px
+  .mat-icon-button
+    height: 23px
+    width: 23px
+    line-height: 23px
+    .material-icons
+      font-size: 15px
+school-layout-management .table thead th
+  text-align: center
+  background-image: none,linear-gradient(to bottom,rgba(255,255,255,.45) 0,rgba(255,255,255,0) 100%)
+  background-color: #d9ecf5
+  border: 1px #a3d0e4 solid
+  border-top: none
+  padding: 5px
+  color: #00435e
+  &:first-child
+    border-left: none
+  &:last-child
+    border-right: none
+school-layout-management .table tbody 
+  tr
+    &:nth-of-type(odd)
+      background-color: #e6f2f8
+    &:hover
+      background-color: #7ad2f7
+      background-image: none,linear-gradient(to bottom,rgba(255,255,255,.4) 0,rgba(255,255,255,0) 100%)
+    td
+      vertical-align: middle
+      border-top: none
+      padding: 5px
+      &:first-child
+        text-align: center
+.mat-paginator
+  color: #00435e
+  border-top: 1px #a3d0e4 solid
+  background-image: none,linear-gradient(to bottom,rgba(255,255,255,.45) 0,rgba(255,255,255,0) 100%)
+  background-color: #d9ecf5
+  .mat-paginator-container
+    min-height: 40px
+  .mat-form-field-appearance-legacy .mat-form-field-infix
+    border-top: none
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper
+    padding-bottom: 0
+  .mat-form-field-appearance-legacy .mat-form-field-underline
+    bottom: 0.25em
+  .mat-paginator-page-size-select
+    margin-top: 0
+  //   background-color: #a3d0e4
+  // .mat-select-arrow
+  //   color: #a3d0e4
+.card
+  border-color: #a3d0e4
+  .card-header
+    border-bottom-color: #a3d0e4
+    height: 40px
+    strong
+      text-transform: uppercase
+  .card-footer
+    border-top-color: #a3d0e4
+.mat-dialog-container .card-header 
+  background-image: none,linear-gradient(to bottom,rgba(255,255,255,.45) 0,rgba(255,255,255,0) 100%)
+  background-color: #d9ecf5
+  padding: 5px
+  height: 30px
+  strong
+    text-transform: none
+    font-weight: normal
+  > .mat-icon-button.mat-warn
+    color: #000000
+  .mat-mini-fab
+    width: 24px !important
+    height: 24px !important
+    line-height: 24px !important
+  .mat-icon-button
+    width: 30px
+    height: 30px
+    line-height: 30px
+    .material-icons
+      font-size: 15px
+    .mat-button-focus-overlay
+      background-color: unset
+.mat-dialog-container
+  .card-footer
+    .mat-raised-button
+      .mat-button-wrapper
+        font-size: 12px
+.mat-mini-fab
+  width: 30px !important
+  height: 30px !important
+  line-height: 30px !important
+  .mat-button-wrapper
+    padding: 0 !important
+    .material-icons
+      font-size: 20px
+.col-head
+  width: auto
+  &:first-child
+    width: 50px
+  &:last-child
+    width: 130px
+.mat-dialog-container
+  padding: 0 !important
+.mat-expansion-panel-header
+  padding: 0 16px !important  
+.toolbar 
+  .mat-select-arrow
+    border-top-color: #ffffff
+  .mat-form-field-type-mat-select .mat-form-field-label, .mat-select-value-text
+    color: #ffffff
+  .mat-form-field-appearance-legacy .mat-form-field-underline
+    background-color: #ffffff 
+.scroll-y
+  overflow-y: scroll
+// mat-dialog-container
+//   .card-header
+//     background-color: #1976d2
+//     color: #ffffff
+.mat-form-field-appearance-outline .mat-form-field-outline  
+  display: flex
+  position: absolute
+  top: .35em !important
+  left: 0
+  right: 0
+  bottom: 0
+  pointer-events: none
+.mat-form-field-wrapper
+  padding-bottom: 11px
+.mat-form-field:not(#nienhocMFF) .mat-form-field-infix
+  border-top: none
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label
+  margin-top: 9px !important
+.mat-form-field-appearance-outline .mat-select-arrow-wrapper 
+  transform: translateY(25%) !important
+.wrap-rdb
+  position: relative
+  .rdb
+    position: absolute
+    top: 12px
+    left: 33px
+    font-size: 12px
+.tb-sc
+  position: relative
+  .myspinner
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+  .scroller
+    overflow: auto
+.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-datepicker-toggle .mat-icon-button
+  transform: translateY(5px)    
+.invisible
+  visibility: hidden
+.mat-list-base
+  padding-top: 0 !important
+.mat-expansion-panel
+  background: transparent
+.mat-drawer
+  background-color: #0576bd
+  .mat-list-item-content, .mat-expansion-panel-header-title, .mat-expansion-indicator::after
+    color: #ffffff
+    font-size: 16px
+  .mat-expansion-panel .mat-expansion-panel-header.active,
+  .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]),
+  .mat-nav-list .mat-list-item.active,
+  .mat-nav-list .mat-list-item:hover
+    background-color: #1dcbfc
+  .mat-expansion-panel-body
+    background-color: #cdf9fe
+    padding: 0
+    .mat-list-item-content
+      color: #000000
+      padding-left: 32px !important
+    .mat-nav-list .mat-list-item:hover
+      background-color: #afdfe9
+    .mat-nav-list .mat-list-item.active
+      background-color: #afdfe9
+.pointer
+  cursor: pointer
+a.link
+  cursor: pointer
+  &:hover
+    color: #dddddd!important
+.mat-snack-bar-container
+  padding: 0!important    
+#sideSpinner
+  position: absolute
+  top: 40px
+  left: 50%
+  margin-left: -15px
+.hr-sch
+  margin-left: 0
+  margin-right: 0
+  border: 0
+  height: 1px
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 175, 248, 0.75), rgba(0, 0, 0, 0))
+.mat-form-field
+  font-size: 12px
+// .toolbar .mat-form-field
+//   font-size: unset
+.col-xl, .col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg, .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md, .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm, .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col, .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1
+  padding-left: 5px !important
+  padding-right: 5px !important
+.row
+  margin-left: -5px !important
+  margin-right: -5px !important
+.mat-raised-button
+  line-height: 30px !important

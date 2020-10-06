@@ -17,7 +17,36 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@webapp-management-views/*": [
+        "./projects/school-fe/src/app/management-views/*"
+      ],
+      "@webapp-views/*": [
+        "./projects/school-fe/src/app/views/*"
+      ],
+      "@webapp-popups/*": [
+        "./projects/school-fe/src/app/popups/*"
+      ],
+      "@webapp-components/*": [
+        "./projects/school-fe/src/app/components/*"
+      ],
+      "@webapp-helpers/*": [
+        "./projects/school-fe/src/app/helpers/*"
+      ],
+      "@webapp-layouts/*": [
+        "./projects/school-fe/src/app/layouts/*"
+      ],
+      "@webapp-auth/*": [
+        "./projects/school-fe/src/app/auth/*"
+      ],
+      "@webapp-svc/*": [
+        "./projects/school-fe/src/app/services/*"
+      ],
+      "@environment": [
+        "./projects/school-fe/src/environments/environment"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

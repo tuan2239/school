@@ -1,0 +1,14 @@
+<mat-form-field appearance="outline" [floatLabel]="'always'">
+    <mat-label>{{label}}</mat-label> 
+    <input matInput #input [required]="required" [placeholder]="placeholder"
+    [formControl]="ascModel" [matAutocomplete]="auto"> 
+    <mat-error *ngIf="required">Không bỏ trống trường bắt buộc</mat-error>
+    <button *ngIf="buttonIsShow()" (click)="ascModel.setValue(null)" id="button-file" matSuffix><i class="material-icons">clear</i></button>
+    <mat-autocomplete #auto="matAutocomplete" (closed)="panelClosed()"
+        [displayWith]="displayFn" (optionSelected)="optionSelected()">
+        <mat-option *ngFor="let obj of listObservable | async" [value]="obj">{{obj.text}}</mat-option>
+        <ng-container *ngIf="isLoading">
+            <mat-option [value]="{id: null, text: ''}"><mat-spinner [diameter]="32"></mat-spinner></mat-option>
+        </ng-container>
+    </mat-autocomplete> 
+</mat-form-field>

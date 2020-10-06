@@ -1,0 +1,35 @@
+
+<div class="wrap-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <ng-container *ngFor="let clHead of config.colHeadNames">
+                    <th class="col-head">{{clHead}}</th>
+                </ng-container>
+                <th *ngIf="config.buttons && config.buttons.length > 0"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data; let i = index">
+                <td>{{(pageIndex * pageSize) + 1 + i}}</td>
+                <ng-container *ngFor="let colField of config.colFieldNames; let colNum = index">
+                    <td *ngIf="config.colFieldTypes[colNum] == 'number'">{{item[colField] | number}}</td>
+                    <td *ngIf="config.colFieldTypes[colNum] == 'string'">{{item[colField]}}</td>
+                    <td *ngIf="config.colFieldTypes[colNum] == 'date'" class="text-center">{{item[colField] | date: 'dd/MM/yyyy'}}</td>
+                    <td *ngIf="config.colFieldTypes[colNum] == 'gender'">{{item[colField] | gender}}</td>
+                </ng-container>
+                <td class="text-center" *ngIf="config.buttons && config.buttons.length > 0">
+                    <ng-container *ngFor="let btn of config.buttons; let btnIndex = index">
+                        <button mat-icon-button (click)="buttonClickFn(btn.functionName, item)" [color]="btn.color" [matTooltip]="btn.tooltip" [matTooltipPosition]="'above'">
+                            <i class="material-icons">{{btn.icon}}</i>
+                        </button>
+                        <ng-container *ngIf="btnIndex != (config.buttons.length - 1)">&nbsp;</ng-container>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[5,10,20,100]"
+        (page)="pageEvent($event)">
+    </mat-paginator>
+</div>
