@@ -1,1 +1,88 @@
-<p>sign-in works!</p>
+<header>
+  <div class="">
+    <div class="logo-login ">
+      <div class="logo-login-main">
+        <div class="img-logo">
+          <img src="assets/login/images/quochuy.png">
+        </div>
+        <div class="title-logo">
+          <div class="title-red">
+          </div>
+          <div class="title-blue">
+            <span>HỆ THỐNG QUẢN LÝ GIÁO DỤC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="container-fluid height-100">
+    <div class="height-100">
+      <div class="notification-login row" >
+        <div class="col-md-9">
+        </div>
+
+        <!--Login-->
+        <div class="col-md-3 height-100">
+          <div class="bg-color-login-user height-100">
+            <div class="login-user text-center" id="pageLoginRedirect">
+              <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="login-title">
+                  <p>Đăng nhập tài khoản</p>
+                </div>
+                <div class="img-login logoLogin">
+                  <img src="assets/login/images/Layer 5.png">
+                </div>
+                <div class="login-user" [ngClass]="{'alert-validate': validate('username')}" data-validate="Tên đăng nhập là bắt buộc">
+                  <input type="text" id="userid" formControlName="username" placeholder="Tên đăng nhập">
+                  <br>
+                </div>
+                <div class="login-pass validate-input" [ngClass]="{'alert-validate': validate('password')}" data-validate="Mật khẩu là bắt buộc">
+                  <div><i *ngIf="!validate('password')" (mousedown)="hidePassword = false; blurPassword()" (mouseup)="hidePassword = true" id="youaretheappleofmyeye" class="fa fa-eye"></i></div>
+                  <input type="password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" id="password" placeholder="Mật khẩu">
+                </div>
+                <!-- <div class="login-pass"><img border="0" class="captcha-input" float="left" href="javascript:void(0)"
+                    id="newcaptcha" src="http://school_leloi.epmt.com.vn:2019/Account/GetCaptcha" style="padding-right: 5px; max-height: 35px" /><input
+                    class="captcha-input" id="Captcha" name="Captcha" placeholder="Nhập mã" type="text" />
+                  </div> -->
+
+                <div class="login-pass">
+                  <span id="message"></span>
+                </div>
+                <div class="login-submit">
+                  <button>
+                    Đăng nhập
+                    <i class="fa fa-spinner fa-spin" *ngIf="loadingLogin"></i>
+                  </button>
+                </div>
+                <div class="user-many">
+                  <a style="float:left;display:block" href="javascript:void(0)" class="forgetPassword">Quên mật khẩu ?</a>
+                  <a style="float:right;display:block" (click)="formLoginOpened = false" class="otherAccount" href="#">Chọn tài khoản khác</a>
+                </div>
+              </form>
+            </div>
+            <div class="login-support-main">
+              <div class="login-contact">
+                <a><i class="fa fa-phone-square" aria-hidden="true"></i>Thông tin hỗ trợ</a>
+              </div>
+              <div class="login-support">
+                <p>Hotline: (028) 2212 2696</p>
+                <p>Email: support@ascvn.com.vn</p>
+                <p>Website: <a href="http://qlkh.ascvn.com.vn" target="_blank">qlkh.ascvn.com.vn</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container-fuild">
+    <div class="copyright-login text-center">
+      <p></p>
+    </div>
+  </div>
+</footer>

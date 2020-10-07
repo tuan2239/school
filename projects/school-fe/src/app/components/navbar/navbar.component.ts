@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.userInfo = JSON.parse(localStorage.getItem('currentUser')) || {fullName: 'No name'};
+    this.userInfo = JSON.parse(localStorage.getItem('app-token')) || {fullName: 'No name'};
   }
   toggleRightSidenav() {
     this.sidebarService.toggle();

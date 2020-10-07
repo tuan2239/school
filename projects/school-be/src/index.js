@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { ApolloServer, AuthenticationError } from 'apollo-server-express';
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import schema from './schema';
 import resolvers from './resolvers';
@@ -8,6 +9,7 @@ import models from './models';
 import jwt from "jsonwebtoken";
 
 const app = express();
+app.use(cors());
 
 const getMe = async req => {
     const token = req.headers['x-token'];
