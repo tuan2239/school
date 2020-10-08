@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const appToken = JSON.parse(localStorage.getItem('app-token'));
 
-        if (appToken && appToken.uid) {
+        if (appToken && appToken.id) {
             return true;
         }
         localStorage.clear();

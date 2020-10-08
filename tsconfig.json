@@ -15,9 +15,11 @@
       "node_modules/@types"
     ],
     "lib": [
-      "es2018",
-      "dom"
+      "es2019",
+      "dom",
+      "esnext.asynciterable"
     ],
+    "skipLibCheck": true,
     "paths": {
       "@webapp-management-views/*": [
         "./projects/school-fe/src/app/management-views/*"
@@ -42,6 +44,9 @@
       ],
       "@webapp-svc/*": [
         "./projects/school-fe/src/app/services/*"
+      ],
+      "@webapp-interfaces/*": [
+        "./projects/school-fe/src/app/interfaces/*"
       ],
       "@environment": [
         "./projects/school-fe/src/environments/environment"

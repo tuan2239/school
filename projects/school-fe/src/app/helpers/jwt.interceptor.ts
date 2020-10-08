@@ -16,15 +16,12 @@ export class JwtInterceptor implements HttpInterceptor {
 
     constructor(private authenticationService: AuthenticationService, private utilsService: UtilsService,private router: Router) {
     }
-    token: any;
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.appToken = JSON.parse(localStorage.getItem('app-token'));
 
-        if (!request.url.includes('Refresh') ) {
-            // add authorization header with jwt token if available
-            if (this.appToken && this.appToken.token) {
-                request = this.addToken(request, this.appToken.token);
-            }
+        // add authorization header with jwt token if available
+        if (this.appToken && this.appToken.token) {
+            request = this.addToken(request, this.appToken.token);
         }
 
         return next.handle(request).pipe(

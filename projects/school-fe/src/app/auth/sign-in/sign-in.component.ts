@@ -10,7 +10,6 @@ import { UtilsService } from '@webapp-svc/core/utils.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit, AfterViewInit {
-  response: any;
   returnUrl: string;
   loadingLogin = false;
   loginForm = new FormGroup({
@@ -34,7 +33,7 @@ export class SignInComponent implements OnInit, AfterViewInit {
     })
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
     const appToken = this.authenticationService.appTokenValue;
-    if (appToken && appToken.uid) {
+    if (appToken && appToken.id) {
       this.router.navigate([this.returnUrl]);
     }
   }
@@ -47,21 +46,9 @@ export class SignInComponent implements OnInit, AfterViewInit {
       this.loadingLogin = true;
       const loginForm = this.loginForm.value;
 
-      // if(loginForm.username === 'admin' && loginForm.password === '123456'){
-      //   localStorage.setItem('app-token', JSON.stringify({uid:123, fullName: 'Admin', token: 'fsdlkfsjlkquandeptrai'}));
-      //   this.router.navigate([this.returnUrl]);
-      // } else {
-      //   this.utilsService.showNotification('top', 'right', 'Sai thông tin đăng nhập!', 4);
-      // }
-
       this.authenticationService.login(loginForm.username, loginForm.password).subscribe(
         data => {
-          this.response = data;
-          console.log(data);
-          // if (data.status == 0) {
-          //   this.router.navigate([this.returnUrl]);
-          // } else {
-          // }
+            this.router.navigate([this.returnUrl]);
         },
         () => {
           this.utilsService.showNotification('top', 'right', 'Đăng nhập thất bại', 4);

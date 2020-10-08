@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UtilsService } from './utils.service';
 import gql from 'graphql-tag';
-// import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -56,22 +56,23 @@ export class AuthenticationService {
         return this.apollo.mutate({
             mutation: this.signInMutation,
             variables: loginInfo
-        }).pipe(
-            map(user => {
-            // const helper = new JwtHelperService();
-                console.log(user);
-            // if (user && user.userInfo && user.status === 0) {
-            //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-            //     localStorage.setItem('app-token', JSON.stringify(user.userInfo));
-            //     this.appTokenSubject.next(user.userInfo);
-
-            // }
-            return user;
-        }));
-            //  return this.http.post<any>(environment.apiUrl+'/Authenticate/Login', loginInfo, { headers: this.header })
+        })
+        .pipe(
+            map((user: any) => {
+                const token = user?.data?.signIn?.token;
+                if (token){
+                    const helper = new JwtHelperService();
+                    const data = helper.decodeToken(token);
+                    localStorage.setItem('app-token', JSON.stringify({...data, token}));
+                    this.appTokenSubject.next(data);
+                    return data;
+                }
+                return user;
+            })
+        );
     }
     refreshToken(refreshTokenModel: any){
-        return this.http.post(`${environment.apiUrl}${this.version}/Authenticate/Refresh`, refreshTokenModel);
+        return this.http.post(`${environment.apiUrl}/Authenticate/Refresh`, refreshTokenModel);
     }
 
     logout() {
