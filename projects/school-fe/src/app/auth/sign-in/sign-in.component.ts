@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@webapp-svc/core/authentication.service';
@@ -6,14 +6,13 @@ import { UtilsService } from '@webapp-svc/core/utils.service';
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  templateUrl: './sign-in.component.html'
 })
-export class SignInComponent implements OnInit, AfterViewInit {
+export class SignInComponent implements OnInit {
   returnUrl: string;
   loadingLogin = false;
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
   validateMode = false;
@@ -24,39 +23,34 @@ export class SignInComponent implements OnInit, AfterViewInit {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute) {
   }
-  ngAfterViewInit(): void {
-  }
-  ngOnInit() {
+  public ngOnInit(): void {
     this.loginForm.valueChanges.subscribe(() => {
       if (this.loginForm.valid) this.validateMode = false;
       else this.validateMode = true;
     })
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    const appToken = this.authenticationService.appTokenValue;
-    if (appToken && appToken.id) {
-      this.router.navigate([this.returnUrl]);
-    }
   }
-  validate(controlName: string) {
+  public validate(controlName: string): boolean {
     return this.loginForm.controls[controlName].hasError('required') && this.validateMode;
   }
-  login() {
+  public login(): void {
     this.validateMode = true;
     if (this.loginForm.valid) {
       this.loadingLogin = true;
-      const loginForm = this.loginForm.value;
 
-      this.authenticationService.login(loginForm.username, loginForm.password).subscribe(
+      this.authenticationService.login(this.loginForm.value).subscribe(
         data => {
             this.router.navigate([this.returnUrl]);
+            this.loadingLogin = false;
         },
         () => {
           this.utilsService.showNotification('top', 'right', 'Đăng nhập thất bại', 4);
+            this.loadingLogin = false;
         }
       );
     }
   }
-  blurPassword(){
+  public blurPassword(): void{
     document.getElementById('password').blur();
   }
 

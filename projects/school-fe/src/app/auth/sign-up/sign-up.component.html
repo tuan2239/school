@@ -1,0 +1,42 @@
+<form class="form" [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="login-title">
+      <p>Đăng nhập tài khoản</p>
+    </div>
+    <div class="img-login logoLogin">
+      <img src="assets/login/images/Layer 5.png">
+    </div>
+    <div class="login-user" [ngClass]="{'alert-validate': validate('name')}"
+    data-validate="Tên đầy đủ là bắt buộc">
+    <input type="text" id="name" formControlName="name" placeholder="Tên đầy đủ">
+      <br>
+    </div>
+    <div class="login-user">
+    <input type="text" id="phone" formControlName="phone" placeholder="Số điện thoại">
+      <br>
+    </div>
+    <div class="login-user" [ngClass]="{'alert-validate': validate('email')}"
+    data-validate="Email là bắt buộc">
+    <input type="text" id="email" formControlName="email" placeholder="Email">
+      <br>
+    </div>
+    <div class="login-pass validate-input" [ngClass]="{'alert-validate': validate('password')}"
+      data-validate="Mật khẩu là bắt buộc">
+      <div><i *ngIf="!validate('password')" (mousedown)="hidePassword = false; blurPassword()"
+          (mouseup)="hidePassword = true" id="youaretheappleofmyeye" class="fa fa-eye"></i></div>
+      <input type="password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" id="password"
+        placeholder="Mật khẩu">
+    </div>
+  
+    <div class="login-pass">
+      <span id="message"></span>
+    </div>
+    <div class="login-submit">
+      <button>
+        Đăng ký
+        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+      </button>
+    </div>
+    <div class="user-many">
+      <a style="float:left;display:block" [routerLink]="['/auth/sign-in']" class="forgetPassword">Đăng nhập</a>
+    </div>
+  </form>

@@ -12,13 +12,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    appTokenSubject: BehaviorSubject<any>;
-    appToken: Observable<any>;
-    header: HttpHeaders;
+    public appTokenSubject: BehaviorSubject<any>;
+    public appToken: Observable<any>;
+    private header: HttpHeaders;
 
     private signInMutation: DocumentNode = gql`
         mutation signIn($email: String!, $password: String!){
             signIn(email:$email, password: $password){
+                token
+            }
+        }
+    `;
+    private signUpMutation: DocumentNode = gql`
+        mutation signUp($signUpInput: SignUpInput!){
+            signUp(signUpInput: $signUpInput){
                 token
             }
         }
@@ -47,36 +54,46 @@ export class AuthenticationService {
         return this.appTokenSubject.value;
     }
 
-    login(email: string, password: string): Observable<MutationResponse> {
-        const loginInfo = {
-            email,
-            password
-        };
-
+    public login(loginInfo: any): Observable<MutationResponse> {
         return this.apollo.mutate({
             mutation: this.signInMutation,
             variables: loginInfo
         })
         .pipe(
-            map((user: any) => {
-                const token = user?.data?.signIn?.token;
-                if (token){
-                    const helper = new JwtHelperService();
-                    const data = helper.decodeToken(token);
-                    localStorage.setItem('app-token', JSON.stringify({...data, token}));
-                    this.appTokenSubject.next(data);
-                    return data;
-                }
-                return user;
-            })
+            map(this.mapUserHandle)
         );
     }
-    refreshToken(refreshTokenModel: any){
+    public register(data: any): Observable<MutationResponse> {
+        const registerInfo = {
+            signUpInput: data
+        };
+
+        return this.apollo.mutate({
+            mutation: this.signUpMutation,
+            variables: registerInfo
+        })
+        .pipe(
+            map(this.mapUserHandle)
+        );
+    }
+    public refreshToken(refreshTokenModel: any){
         return this.http.post(`${environment.apiUrl}/Authenticate/Refresh`, refreshTokenModel);
     }
 
-    logout() {
+    public logout() {
         localStorage.clear();
         this.appTokenSubject.next(null);
+    }
+
+    private mapUserHandle(user: any) {
+        const token = user?.data?.signIn?.token;
+        if (token){
+            const helper = new JwtHelperService();
+            const data = helper.decodeToken(token);
+            localStorage.setItem('app-token', JSON.stringify({...data, token}));
+            this.appTokenSubject.next(data);
+            return data;
+        }
+        return user;
     }
 }

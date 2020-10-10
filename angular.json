@@ -29,7 +29,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/school-fe/src/styles.sass"
+              "projects/school-fe/src/styles.sass",
+              "projects/school-fe/src/assets/css/auth.scss"
             ],
             "scripts": []
           },

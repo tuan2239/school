@@ -3,7 +3,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&display=swap&subset=vietnamese');
 
-::ng-deep body {
+body {
     font-size: 14px;
     height: 100vh;
 }
@@ -75,10 +75,10 @@ section {
 }
 
 .notification-login {
-    margin: 0 15px;
-    background: url(/assets/login/images/login_bg.jpg) no-repeat 30% 20%;
     height: 100%;
-    width: calc(100% - 15px);
+    width: 100%;
+    max-width: 380px;
+    margin: 40px auto 0;
 }
 
     .notification-login .title-login {
@@ -235,8 +235,10 @@ section {
 }
 
 
-.bg-color-login-user .login-user .login-pass {
-    margin-top: 8px;
+.bg-color-login-user .login-user{
+  .login-pass, .login-user + .login-user {
+      margin-top: 8px;
+  }
 }
 
 .bg-color-login-user .login-user .button-login a > img {
