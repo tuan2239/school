@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { AuthenticationService } from '../services/core/authentication.service';
+import { hasToken } from './token.helper';
 
 @Injectable({ providedIn: 'root' })
 export class ReLoginGuard implements CanActivate {
@@ -11,9 +12,8 @@ export class ReLoginGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const appToken = this.authenticationService.appTokenValue;
-        if (appToken && appToken.id) {
-            this.router.navigate([state.url]);
+        if (hasToken()) {
+            this.router.navigate(['/']);
             return false;
         }
         return true;

@@ -16,17 +16,7 @@ export class SidebarComponent  {
         this.url = event.url;
       }
     })
-    // if(!localStorage.getItem('decentralizedMenu')){
-    //   this.loadSidebar = true;
-    //   http.get(`${environment.apiUrl}v1.0/Authenticate/GetMenu`).subscribe((data: any) => {
-    //     localStorage.setItem('decentralizedMenu', JSON.stringify(data));
-    //     this.getMenu();
-    //     this.loadSidebar = false;
-    //   });
-    // }
-    // else this.getMenu();
   }
-  // menuData = [];
   menuData = [
     {
       title: 'Dashboard',

@@ -2,6 +2,7 @@ import { AuthenticationService } from '@webapp-svc/core/authentication.service';
 import { SidebarService } from '@webapp-svc/core/sidebar.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { getToken } from '@webapp-helpers/token.helper';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.userInfo = JSON.parse(localStorage.getItem('app-token')) || {fullName: 'No name'};
+    this.userInfo = getToken() || {fullName: 'No name'};
   }
   toggleRightSidenav() {
     this.sidebarService.toggle();

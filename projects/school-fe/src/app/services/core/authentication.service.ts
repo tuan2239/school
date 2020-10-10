@@ -1,21 +1,18 @@
-import { MutationResponse } from './../../interfaces/query';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '@environment';
+import { setToken } from '@webapp-helpers/token.helper';
 import { Apollo } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UtilsService } from './utils.service';
 import gql from 'graphql-tag';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MutationResponse } from './../../interfaces/query';
+import { UtilsService } from './utils.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    public appTokenSubject: BehaviorSubject<any>;
-    public appToken: Observable<any>;
-    private header: HttpHeaders;
-
     private signInMutation: DocumentNode = gql`
         mutation signIn($email: String!, $password: String!){
             signIn(email:$email, password: $password){
@@ -35,24 +32,8 @@ export class AuthenticationService {
         private apollo: Apollo,
         private utils: UtilsService
     ) {
-        const headerSettings: {[name: string]: string | string[]; } = {};
-        this.header = new HttpHeaders(headerSettings);
-        const obj = localStorage.getItem('app-token');
-        if(obj != null){
-            try{
-            this.appTokenSubject = new BehaviorSubject<any>(JSON.parse(obj));
-            }catch(e) {
-                this.appTokenSubject = new BehaviorSubject<any>({});
-            }
-        } else {
-            this.appTokenSubject = new BehaviorSubject<any>({});
-        }
-        this.appToken = this.appTokenSubject.asObservable();
     }
 
-    public get appTokenValue(): any {
-        return this.appTokenSubject.value;
-    }
 
     public login(loginInfo: any): Observable<MutationResponse> {
         return this.apollo.mutate({
@@ -60,7 +41,7 @@ export class AuthenticationService {
             variables: loginInfo
         })
         .pipe(
-            map(this.mapUserHandle)
+            map((resp: any) => this.mapUserHandle(resp, resp?.data?.signIn?.token))
         );
     }
     public register(data: any): Observable<MutationResponse> {
@@ -73,7 +54,7 @@ export class AuthenticationService {
             variables: registerInfo
         })
         .pipe(
-            map(this.mapUserHandle)
+            map((resp: any) => this.mapUserHandle(resp, resp?.data?.signUp?.token))
         );
     }
     public refreshToken(refreshTokenModel: any){
@@ -82,18 +63,15 @@ export class AuthenticationService {
 
     public logout() {
         localStorage.clear();
-        this.appTokenSubject.next(null);
     }
 
-    private mapUserHandle(user: any) {
-        const token = user?.data?.signIn?.token;
+    private mapUserHandle(resp: any, token: any) {
         if (token){
             const helper = new JwtHelperService();
             const data = helper.decodeToken(token);
-            localStorage.setItem('app-token', JSON.stringify({...data, token}));
-            this.appTokenSubject.next(data);
+            setToken({...data, token});
             return data;
         }
-        return user;
+        return resp;
     }
 }

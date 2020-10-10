@@ -5,6 +5,7 @@ import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { AuthenticationService } from '../services/core/authentication.service';
 import { UtilsService } from '../services/core/utils.service';
 import { Router } from '@angular/router';
+import { getToken, hasToken, setToken } from './token.helper';
 
 
 @Injectable()
@@ -17,10 +18,10 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService, private utilsService: UtilsService,private router: Router) {
     }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.appToken = JSON.parse(localStorage.getItem('app-token'));
+        this.appToken = getToken();
 
         // add authorization header with jwt token if available
-        if (this.appToken && this.appToken.token) {
+        if (hasToken()) {
             request = this.addToken(request, this.appToken.token);
         }
 
@@ -65,8 +66,7 @@ export class JwtInterceptor implements HttpInterceptor {
                         this.appToken.token = token.accessToken;
                         this.appToken.accessTokenExpiration = token.accessTokenExpiration;
                         this.appToken.refreshToken = token.refreshToken;
-                        localStorage.setItem('app-token', JSON.stringify(this.appToken));
-                        this.authenticationService.appTokenSubject.next(this.appToken);
+                        setToken(this.appToken)
 
                         this.refreshTokenSubject.next(token.accessToken);
                         return next.handle(this.addToken(request, token.accessToken));
