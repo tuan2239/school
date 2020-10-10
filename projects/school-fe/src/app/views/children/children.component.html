@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Danh sách môn thi</strong>
+        <div class="spacer"></div>
+        <button class="bg-success mr-2"  mat-mini-fab matTooltip="Xuất Excel" [matTooltipPosition]="'above'">
+            <i class="fas fa-file-excel"></i>
+        </button>
+        <button color="primary" mat-mini-fab matTooltip="Thêm mới" [matTooltipPosition]="'above'">
+            <i class="material-icons">add</i>
+        </button>
+        <button color="accent" mat-mini-fab matTooltip="Tìm kiếm nâng cao" class="ml-2" [matTooltipPosition]="'above'"
+        (click)="searchAdvanced = !searchAdvanced">
+            <i class="material-icons">build</i>
+        </button>
+    </div>
+    <div class="card-body">
+        <div *ngIf="searchAdvanced">
+            <form class="row">
+
+                <div class="col-3 ">
+                    <mat-form-field appearance="outline" [floatLabel]="'always'">
+                        <mat-label>Tên kỳ thi</mat-label> 
+                        <input matInput required placeholder="Chọn kỳ thi..."  > 
+                    </mat-form-field>
+                </div>
+                
+                <div class="col-1 pt-1">
+                    <button color="primary" mat-mini-fab matTooltip="Tìm kiếm" (click)="loadGrid()" [matTooltipPosition]="'above'">
+                        <i class="material-icons">search</i>
+                    </button>
+                    <button style="display: none;" id="btnvF"></button>
+                </div>
+            </form>
+        </div>
+        <asc-grid [data]="children" [config]="configData" [length]="5" [pageIndex]="0" [pageSize]="10" (buttonClick)="buttonClick($event)" (pageChange)="pageEvent($event)"></asc-grid>
+    </div>
+</div>

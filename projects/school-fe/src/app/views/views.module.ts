@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ViewsRoutingModule } from './views-routing.module';
-import { DemoComponent } from './demo/demo.component';
+import { ChildrenComponent } from './children/children.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 
 const COMPONENTS = [
-  DemoComponent,
+  ChildrenComponent,
   ASCGridComponent
 ];
 
@@ -14,7 +16,9 @@ const COMPONENTS = [
   declarations: [...COMPONENTS],
   imports: [
     CommonModule,
-    ViewsRoutingModule
+    ViewsRoutingModule,
+    MatPaginatorModule,
+    MatButtonModule
   ]
 })
 export class ViewsModule { }

@@ -1,15 +1,13 @@
 import gql from 'graphql-tag';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ASCGridConfigData } from '@webapp-components/asc-grid/asc-grid.component';
 
 @Component({
-  selector: 'app-demo',
-  templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.scss']
+  selector: 'app-children',
+  templateUrl: './children.component.html'
 })
-export class DemoComponent implements OnInit {
+export class ChildrenComponent implements OnInit {
   public children: any;
   public configData: ASCGridConfigData = {
     colHeadNames: ['STT', 'Name', 'Grade'],
