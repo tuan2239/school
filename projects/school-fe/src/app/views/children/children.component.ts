@@ -1,7 +1,9 @@
-import gql from 'graphql-tag';
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { MatDialog } from '@angular/material/dialog';
 import { ASCGridConfigData } from '@webapp-components/asc-grid/asc-grid.component';
+import { ConfirmComponent } from '@webapp-popups/confirm/confirm.component';
+import { ChildrenPopupComponent } from './children-popup/children-popup.component';
+import { ChildrenService } from './children.service';
 
 @Component({
   selector: 'app-children',
@@ -9,8 +11,9 @@ import { ASCGridConfigData } from '@webapp-components/asc-grid/asc-grid.componen
 })
 export class ChildrenComponent implements OnInit {
   public children: any;
+  public searchAdvanced: boolean = true;
   public configData: ASCGridConfigData = {
-    colHeadNames: ['STT', 'Name', 'Grade'],
+    colHeadNames: ['STT', 'Tên', 'Lớp'],
     colFieldNames: ['name', 'grade'],
     colFieldTypes: ['string','string'],
     buttons: [
@@ -30,25 +33,15 @@ export class ChildrenComponent implements OnInit {
   }
 
   constructor(
-    private apollo: Apollo
+    private service: ChildrenService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.load();
   }
-
   public load(): void {
-    this.apollo.query({
-      query: gql`
-        {
-          children{
-            id
-            name
-            grade
-          }
-        }
-      `
-    }).subscribe((resp: any) => {
+    this.service.getChildren().valueChanges.subscribe((resp: any) => {
       this.children = resp.data.children;
     });
   }
@@ -67,11 +60,36 @@ export class ChildrenComponent implements OnInit {
         break;
     }
   }
+  public add(): void{
+    this.openDialog();
+  }
   public edit(item: any): void{ 
-    alert('edit' + item.id);
+    this.openDialog(item);
   }
-  delete(item: any){ 
-    alert('delete' + item.id);
+  public delete(item: any){ 
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '750px',
+      data: {
+        height: '500px',
+        title: 'Delete',
+        message: 'delete' + item.id,
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      // chạy sau khi đóng popup
+    });
   }
-
+  private openDialog(children?: any) {
+    const dialogRef = this.dialog.open(ChildrenPopupComponent, {
+      width: '750px',
+      data: {
+        height: '500px',
+        title: 'Thông tin trẻ em',
+        children
+      }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      // chạy sau khi đóng popup
+    });
+  }
 }

@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.userInfo = getToken() || {fullName: 'No name'};
+    this.userInfo = getToken() || {name: 'No name'};
   }
   toggleRightSidenav() {
     this.sidebarService.toggle();

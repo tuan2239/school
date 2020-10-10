@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-header">
+        <strong>{{data.title}}</strong>
+        <div class="spacer"></div>
+        <button mat-icon-button color="warn" (click)="cancel()" matTooltip="Đóng" [matTooltipPosition]="'above'">
+            <i class="material-icons">clear</i>
+        </button>
+    </div>
+    <div class="card-body scroll-y" [style.max-height]="data.height">
+        <form [formGroup]="childForm">
+            <mat-form-field appearance="outline" [floatLabel]="'always'">
+                <mat-label>Tên</mat-label>
+                <input matInput placeholder="vd: Quách Anh Tuấn" formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" [floatLabel]="'always'">
+                <mat-label>Lớp</mat-label>
+                <input matInput placeholder="vd: 12" formControlName="grade">
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="card-footer text-center">
+        <button mat-raised-button color="warn" (click)="cancel()">Hủy bỏ</button>
+        &nbsp;
+        <button mat-raised-button color="primary" (click)="submit()">{{isEditMode ? 'Sửa' : 'Thêm mới'}}</button>
+    </div>
+</div>

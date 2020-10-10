@@ -8,10 +8,10 @@ export default gql`
   type Children {
     id: ID!
     name: String!
-    grade: Float!
+    grade: Int!
   }
 
   extend type Mutation {
-    addChild(name: String!, grade: Float!): Children! 
+    addChild(name: String!, grade: Int!): Children! 
   }
 `;

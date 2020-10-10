@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-header">
+        <strong>{{data.title}}</strong>
+        <div class="spacer"></div>
+        <button mat-icon-button color="warn" (click)="no()" matTooltip="Đóng" [matTooltipPosition]="'above'">
+            <i class="material-icons">clear</i>
+        </button>
+    </div>
+    <div class="card-body scroll-y" [style.max-height]="data.height">
+        <h2 [innerHTML]="contents"></h2>
+    </div>
+    <div class="card-footer text-center">        
+        <button mat-raised-button color="primary" (click)="yes()">Đồng ý</button>
+    </div>
+</div>

@@ -1,11 +1,8 @@
 <div class="card">
     <div class="card-header">
-        <strong>Danh sách môn thi</strong>
+        <strong>Danh sách con trẻ</strong>
         <div class="spacer"></div>
-        <button class="bg-success mr-2"  mat-mini-fab matTooltip="Xuất Excel" [matTooltipPosition]="'above'">
-            <i class="fas fa-file-excel"></i>
-        </button>
-        <button color="primary" mat-mini-fab matTooltip="Thêm mới" [matTooltipPosition]="'above'">
+        <button color="primary" mat-mini-fab matTooltip="Thêm mới" [matTooltipPosition]="'above'" (click)="add()">
             <i class="material-icons">add</i>
         </button>
         <button color="accent" mat-mini-fab matTooltip="Tìm kiếm nâng cao" class="ml-2" [matTooltipPosition]="'above'"
@@ -19,13 +16,13 @@
 
                 <div class="col-3 ">
                     <mat-form-field appearance="outline" [floatLabel]="'always'">
-                        <mat-label>Tên kỳ thi</mat-label> 
-                        <input matInput required placeholder="Chọn kỳ thi..."  > 
+                        <mat-label>Tên con trẻ</mat-label> 
+                        <input matInput required placeholder="Tên con trẻ"  > 
                     </mat-form-field>
                 </div>
                 
                 <div class="col-1 pt-1">
-                    <button color="primary" mat-mini-fab matTooltip="Tìm kiếm" (click)="loadGrid()" [matTooltipPosition]="'above'">
+                    <button color="primary" mat-mini-fab matTooltip="Tìm kiếm" (click)="load()" [matTooltipPosition]="'above'">
                         <i class="material-icons">search</i>
                     </button>
                     <button style="display: none;" id="btnvF"></button>
