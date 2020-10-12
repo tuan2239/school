@@ -40,8 +40,9 @@ export class ChildrenPopupComponent implements OnInit {
   private add(): void{
     /// nhớ viết lại cho đàng hoàng nhe cu
     const data = {
-      name: 'Tuấn Bê đê',
-      grade: 12
+      name: this.childForm.controls.name.value,
+      // tslint:disable-next-line: radix
+      grade: parseInt(this.childForm.controls.grade.value)
     }
     this.service.addChild(data).subscribe(() => {
       this.dialogRef.close();
