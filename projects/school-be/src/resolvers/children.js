@@ -10,9 +10,9 @@ export default {
             await achild.save();
             return achild;
         },
-        updateChild: async (_, { id, child }, { models }) => {
+        updateChild: async (_, { child }, { models }) => {
             return await models.Children.findByIdAndUpdate(
-              id,
+              child.id,
               child,
               { new: true },
             );

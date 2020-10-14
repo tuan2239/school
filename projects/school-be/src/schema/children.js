@@ -6,7 +6,6 @@ export default gql`
   }
 
   type Children {
-    id: ID!
     name: String!
     grade: Int!
   }
@@ -14,9 +13,11 @@ export default gql`
   extend type Mutation {
     addChild(name: String!, grade: Int!): Children! 
     removeChild(id: ID!): Boolean
-    updateChild(id: ID!, child: ChildrenInput!): Children!
+    updateChild(child: ChildrenUpdateInput!): Children!
   }
-  input ChildrenInput{
+
+  input ChildrenUpdateInput{
+    id: ID!
     name: String!
     grade: Int!
   }
