@@ -10,14 +10,14 @@ export default {
             await achild.save();
             return achild;
         },
-        updateChild: async (parent, { id, fund }, { models }) => {
-            return await models.Fund.findByIdAndUpdate(
+        updateChild: async (_, { id, child }, { models }) => {
+            return await models.Children.findByIdAndUpdate(
               id,
-              children,
+              child,
               { new: true },
             );
           },
-        removeChild: async (parent, { id }, { models, me }) => {
+        removeChild: async (_, { id }, { models, me }) => {
             const children= await models.Children.findById(id);
     
             if (children) {
