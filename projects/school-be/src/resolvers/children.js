@@ -1,3 +1,5 @@
+import { isAuthenticated } from "./authorization";
+
 export default {
     Query: {
         children: (_, { }, { models }) => {
@@ -5,6 +7,14 @@ export default {
         }
     },
     Mutation: {
+        // này để khi nào đăng nhập rồi mới dc làm chuyện đó ^^
+        // addChild: combineResolvers(
+        //   isAuthenticated,
+        //   async (_, { name, grade }, { models }) => {
+        //     const achild = new models.Children({ name, grade });
+        //     await achild.save();
+        //     return achild;
+        // }),
         addChild: async (_, { name, grade }, { models }) => {
             const achild = new models.Children({ name, grade });
             await achild.save();
