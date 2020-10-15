@@ -6,6 +6,7 @@ export default gql`
   }
 
   type Children {
+    id: ID!
     name: String!
     grade: Int!
   }

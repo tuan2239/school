@@ -19,7 +19,8 @@ export class ChildrenPopupComponent implements OnInit {
     public dialogRef: MatDialogRef<ChildrenPopupComponent>,
     private service: ChildrenService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { 
+  )
+  {
       this.isEditMode = data.children !== undefined;
       if (this.isEditMode) {
         this.childForm.controls.name.setValue(data.children.name);
@@ -48,13 +49,20 @@ export class ChildrenPopupComponent implements OnInit {
       this.dialogRef.close();
     });
   }
-  private edit(): void{
+
+  private edit(): void {
     // id để edit
     const id = this.data.children.id;
     // data để edit
-    const data = {id, ...this.childForm.value};
-    console.log(data);
-    // chưa có edit BE nên ko có service đó
-    this.dialogRef.close();
+    const data = {
+      id,
+      name: this.childForm.controls.name.value,
+      // tslint:disable-next-line: radix
+      grade: parseInt(this.childForm.controls.grade.value)
+    };
+    this.service.updateChild(data).subscribe(() => {
+      // chưa có edit BE nên ko có service đó
+      this.dialogRef.close();
+    })
   }
 }

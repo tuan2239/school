@@ -63,16 +63,17 @@ export class ChildrenComponent implements OnInit {
   public add(): void{
     this.openDialog();
   }
-  public edit(item: any): void{ 
+  public edit(item: any): void{
     this.openDialog(item);
   }
-  public delete(item: any){ 
+  public delete(item: any){
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '750px',
       data: {
         height: '500px',
         title: 'Delete',
-        message: 'delete' + item.id,
+        message: 'Delete ' + item.id,
+        id: item.id
       }
     });
     dialogRef.afterClosed().subscribe(() => {

@@ -1,7 +1,9 @@
+import { query } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
+import { stringify } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,20 @@ export class ChildrenService {
       }
     }
   `;
+  private updateChildMutation: DocumentNode = gql`
+    mutation updateChild($child: ChildrenUpdateInput!){
+      updateChild(child: $child){
+        id
+      }
+    }
+  `;
+  private deleteChildMutation: DocumentNode = gql`
+    mutation removeChild($id: ID!){
+      removeChild(id: $id){
+      }
+    }
+  `;
+
 
   constructor(
     private apollo: Apollo
@@ -46,4 +62,35 @@ export class ChildrenService {
       ]
     })
   }
+
+  public updateChild(data: any): any {
+    const registerInfo = {
+      child: data
+    };
+    return this.apollo.mutate({
+      mutation: this.updateChildMutation,
+      variables: registerInfo,
+      refetchQueries: [
+        {
+          query: this.getChildrenQuery
+        }
+      ]
+    })
+  }
+
+  public removeChild(data: string): any {
+    const id = {
+      id: data
+    }
+    return this.apollo.mutate({
+      mutation: this.deleteChildMutation,
+      variables: id,
+      refetchQueries: [
+        {
+          query: this.getChildrenQuery
+        }
+      ]
+    })
+  }
+
 }
