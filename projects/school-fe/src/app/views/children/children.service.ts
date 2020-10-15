@@ -35,8 +35,7 @@ export class ChildrenService {
   `;
   private deleteChildMutation: DocumentNode = gql`
     mutation removeChild($id: ID!){
-      removeChild(id: $id){
-      }
+      removeChild(id: $id)
     }
   `;
 
