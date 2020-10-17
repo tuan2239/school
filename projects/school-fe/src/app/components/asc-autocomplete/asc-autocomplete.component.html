@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" [floatLabel]="'always'">
     <mat-label>{{label}}</mat-label> 
     <input matInput #input [required]="required" [placeholder]="placeholder"
-    [formControl]="ascModel" [matAutocomplete]="auto"> 
+    [formControl]="ascModel" [matAutocomplete]="auto">
     <mat-error *ngIf="required">Không bỏ trống trường bắt buộc</mat-error>
     <button *ngIf="buttonIsShow()" (click)="ascModel.setValue(null)" id="button-file" matSuffix><i class="material-icons">clear</i></button>
     <mat-autocomplete #auto="matAutocomplete" (closed)="panelClosed()"

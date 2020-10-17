@@ -1,4 +1,3 @@
-import { ASCGridComponent } from './../components/asc-grid/asc-grid.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,12 +12,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ChildrenPopupComponent } from './children/children-popup/children-popup.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@webapp-share/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 const COMPONENTS = [
-  ChildrenComponent,
-  ASCGridComponent
+  ChildrenComponent, DashboardComponent
 ];
 
 const ENTRYCOMPONENTS = [
@@ -39,7 +39,8 @@ const ENTRYCOMPONENTS = [
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   entryComponents: [...ENTRYCOMPONENTS]
 })

@@ -24,7 +24,7 @@ export class ASCGridComponent implements OnInit {
     @Input() pageSize: number;
     @Output() pageChange = new EventEmitter<any>();
     @Output() buttonClick = new EventEmitter<any>();
-    
+
     ngOnInit(): void {
 
     }

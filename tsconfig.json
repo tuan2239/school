@@ -33,6 +33,12 @@
       "@webapp-components/*": [
         "./projects/school-fe/src/app/components/*"
       ],
+      "@webapp-pipe/*": [
+        "./projects/school-fe/src/app/pipe/*"
+      ],
+      "@webapp-share/*": [
+        "./projects/school-fe/src/app/share/*"
+      ],
       "@webapp-helpers/*": [
         "./projects/school-fe/src/app/helpers/*"
       ],

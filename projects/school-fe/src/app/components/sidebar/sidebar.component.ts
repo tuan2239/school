@@ -20,13 +20,19 @@ export class SidebarComponent  {
   menuData = [
     {
       title: 'Dashboard',
-      link: '/quantrivien',
+      link: '',
+      hasChild: false,
+      icon: 'home'
+    },
+    {
+      title: 'Danh sách',
+      link: '/Children',
       hasChild: false,
       icon: 'home'
     },
     {
       title: 'Import kết quả thi',
-      link: '/quantrivien/importketquathi',
+      link: '/Importketquathi',
       hasChild: false,
       icon: 'import_export'
     },
